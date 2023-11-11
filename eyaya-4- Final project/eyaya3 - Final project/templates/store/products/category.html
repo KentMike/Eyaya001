@@ -1,0 +1,36 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <h2 class="pb-3 h5">{{category.name|title }}</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        {% for book in my_books %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid" alt="Book Cover" src="{{ book.image.url }}">
+            <div class="card-body">
+              <h5 class="card-title">
+                <!-- Inside your template -->
+                <a class="text-dark text-decoration-none" href="{% url 'book_details' book.slug %}">{{ book.title }}</a>
+              </h5>
+              <p class="card-text">{{ book.author }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">9 mins</small>
+                <span class="badge bg-primary"><a href="{{ book.catergory.get_absolute_url }}">{{ book.catergory.name }}</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block title %}Basket summary{% endblock %}
+
+{% block content %}
+
+
+<!-- Display the cart quantity -->
+<div id="basket_qty" class="d-inline-flex"></div>
+
+<main class="pt-3">
+
+    <div class="container">
+        <h1>booking Page</h1>
+        {%for item in basket%}
+        {%with book=item.book%}
+        <main class="pt-5">
+            <div class="row g-3">
+                <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                    <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ book.image.url }}">
+                </div>
+                <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
+                    <h1 class="mb-0 h4">{{ book.title }}</h1>
+                    <p><span class="lead">{{ book.author }}</span>(Author)</p>
+                    <p>{{ book.isbn|slice:":355" }}</p>
+                    <div class="border">
+                        <div class="col border-bottom">
+                            <div class="row p-3">
+                                <div class="col-6">My books</div>
+                                <div class="col-6 text-end"><span class="h4 fw-bold">COPIES {{ basket|length }}</span></div>
+                            </div>
+                        </div>
+                        <!-- ... (previous HTML code) ... -->
+<div class="col-6">
+    <label for="select">Quantity</label>
+    <select id="select" name="quantity"> 
+        <option selected>{{item.quantity}}</option>
+        <!-- Added name attribute -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+</div>
+<div class="col-6 text-end">
+     <button type="button" id="add-button" value="{{ book.id }}" class="btn btn-secondary">update</button>
+     <button type="button" id="delete-button" value="{{ book.id }}" class="btn btn-secondary">delete</button>
+</div>
+<!-- ... (rest of HTML code) ... -->
+
+                    </div>
+                </div>
+            </div>
+        {%endwith%}    
+        {%endfor%}
+    </div>
+</main>
+{% endblock %}
